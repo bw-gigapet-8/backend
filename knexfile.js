@@ -14,5 +14,17 @@ module.exports = {
     seeds: {
       directory: './data/seeds'
     }
+  },
+  production: {
+    client: 'pg',
+    connection: {
+      filename: './data/GigaPetDB.db3'
+    },
+    migrations: {
+      directory: './data/migrations'
+    },
+    seeds: {
+      directory: './data/seeds'
+    }
   }
 };
