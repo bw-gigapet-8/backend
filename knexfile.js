@@ -17,9 +17,7 @@ module.exports = {
   },
   production: {
     client: 'pg',
-    connection: {
-      filename: './data/GigaPetDB.db3'
-    },
+    connection: process.env.DATABASE_URL,
     migrations: {
       directory: './data/migrations'
     },
