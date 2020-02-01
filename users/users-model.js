@@ -5,6 +5,6 @@ module.exports = {
 }
 
 async function getAllUsers() {
-    const users = await db('users')
+    const users = await db('Users')
     return users
 }
