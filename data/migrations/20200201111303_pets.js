@@ -11,10 +11,6 @@ exports.up = function(knex) {
         table.integer('foods_eaten_id')
             .references('id')
             .inTable('Foods_Eaten')
-        table.integer('user_id')
-            .notNullable()
-            .references('id')
-            .inTable('Users')
     })
 };
 
