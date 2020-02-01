@@ -19,6 +19,8 @@ server.get('/', (req, res, next) => {
 
 const PORT = process.env.PORT || 4321
 
-server.listen(PORT, () => {
-    console.log(`### Server is listening on ${PORT}! ###`)
-})
+if(!module.parent) {
+    server.listen(PORT, () => {
+        console.log(`### Server is listening on ${PORT}! ###`)
+    })
+}
