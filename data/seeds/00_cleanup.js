@@ -1,8 +1,8 @@
-exports.seed = async function(knex) {
-  // Deletes ALL existing entries
-    await knex("Foods").del();
-    await knex("Foods_Eaten").del();
-    await knex("Categories").del();
-    await knex("Users").del();
-    await knex("Pets").del();
-};
+const cleaner = require('knex-cleaner')
+
+exports.seed = (knex) => {
+  return cleaner.clean(knex, {
+    mode: 'truncate',
+    ignoreTables: ['knex_migrations', 'knex_migrations_lock'],
+  })
+}
