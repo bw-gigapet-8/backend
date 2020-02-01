@@ -7,7 +7,8 @@ exports.seed = function(knex) {
       return knex('Pets').insert([
         {id: 1, name: 'Pattington'},
         {id: 2, name: 'Hugo'},
-        {id: 3, name: 'Marley'}
+        {id: 3, name: 'Marley'},
+        {id: 4, name: 'Toots'}
       ]);
     });
 };
