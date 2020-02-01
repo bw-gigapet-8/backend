@@ -8,9 +8,6 @@ exports.up = function(knex) {
         table.integer('health')
             .notNullable()
             .defaultTo(15)
-        table.integer('foods_eaten_id')
-            .references('id')
-            .inTable('Foods_Eaten')
     })
 };
 
