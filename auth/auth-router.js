@@ -2,6 +2,7 @@ const router = require('express').Router()
 const bcrypt = require('bcryptjs')
 const Users = require('../users/users-model')
 const jwt = require('jsonwebtoken')
+const secrets = require('../secrets/secret')
 const db = require('../data/db-config')
 
 router.post('/register', async (req, res, next) => {
@@ -29,7 +30,7 @@ router.post('/login', async (req, res, next) => {
     try {
         let { username, password } = req.body
         const user = await Users.findUserByUsername(username)
-        if(user[0] && bcrypt.compareSync(password, user[0].password)) {
+        if(user && bcrypt.compareSync(password, user.password)) {
             const token = signToken(user)
             res.json({
                 message: `Hello there, ${username}`,
@@ -58,7 +59,7 @@ function signToken(user) {
         username: user.username
     }
 
-    return jwt.sign(payload, 'my spidey sense is tingling', options)
+    return jwt.sign(payload, secrets.jwtSecret, options)
 }
 
 module.exports = router

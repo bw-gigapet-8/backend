@@ -13,3 +13,9 @@ https://gigapetdb.herokuapp.com
 Returns a list of all users actively signed up for our application.
 https://gigapetdb.herokuapp.com/users
 
+Requires a username and password, then returns the newly signed up user.
+https://gigapetdb.herokuapp.com/auth/register
+
+
+Requires login credentials (username and password), and returns a welcome message and token for the user.
+https://gigapetdb.herokuapp.com/auth/login
