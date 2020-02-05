@@ -16,11 +16,3 @@ module.exports = async (req, res, next) => {
         res.status(400).json({message:'no token'})
     }
 }
-
-
-// const token = req.headers.authorization;
-//     if(token) {
-//         next()
-//     } else {
-//         res.status(400).json({ message: "No token"})
-//     }
