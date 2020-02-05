@@ -19,3 +19,8 @@ https://gigapetdb.herokuapp.com/auth/register
 
 Requires login credentials (username and password), and returns a welcome message and token for the user.
 https://gigapetdb.herokuapp.com/auth/login
+
+Requires a name ONLY, health is set default to 15.
+Post request adds a pet, more coming soon.
+req.param.id points to the user.id.
+https://gigapetdb.herokuapp.com/auth/:id/pet
