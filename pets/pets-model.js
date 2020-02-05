@@ -10,7 +10,7 @@ async function createPet(req, res, pet_data) {
         const pet = await db('Pets').insert(pet_data)
         const newPet = await findPet(pet[0])
         const pet_id = newPet.id
-        db('Users').where({ pet_id }).column('pet_id').insert(pet_id)
+        db('Users').where({id: req.params.id}).update({pet_id: pet_id})
         return newPet
     }
     catch(err) {
