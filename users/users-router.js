@@ -1,7 +1,10 @@
 const express = require('express')
 const router = express.Router()
 const Users = require('./users-model')
-const jwt_decode = require('jwt-decode')
+const Helpers = require('../utils/helpers')
+const petRouter = require('../pets/pets-router')
+
+router.use('/:id/pet', petRouter)
 
 router.get('/', async (req, res, next) => {
     const users = await Users.getAllUsers()
@@ -9,23 +12,7 @@ router.get('/', async (req, res, next) => {
 })
 
 router.get('/:id', async (req, res, next) => {
-    const user = await Users.findById(req.params.id)
-    const token = req.headers.authorization
-    const decoded = jwt_decode(token)
-    if(!user || !token) {
-        res.status(404).json({
-            error: `No user found.`
-        })
-    } else {
-        if(user.password === decoded.password) {
-            res.status(200).json(user)
-        } else {
-            res.status(400).json({
-                error: `Request denied. This is not your profile!`
-            })
-        }
-    }
+    Helpers.checkUser(req, res, next)
 })
-
 
 module.exports = router

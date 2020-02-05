@@ -15,7 +15,7 @@ async function addUser(user) {
 }
 
 async function findUserByUsername(username) {
-    const user = await db('users').where({ username }).select('id', 'username', 'password')
+    const user = await db('Users').where({ username }).select('id', 'username', 'password')
     return user[0]
 }
 
@@ -25,6 +25,6 @@ async function getAllUsers() {
 }
 
 async function findById(id) {
-    const user = await db('users').first().where({ id }).select('id', 'username', 'password')
+    const user = await db('Users').first().where({ id }).select('id', 'username', 'password')
     return user
 }
