@@ -23,6 +23,7 @@ router.post('/register', async (req, res, next) => {
             })
         }
     }
+    
     catch(err) {
         res.json(err.stack)
     }

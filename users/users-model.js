@@ -5,7 +5,7 @@ module.exports = {
     addUser,
     findUserByUsername,
     getAllUsers,
-    findById
+    findById,
 }
 
 async function addUser(user) {

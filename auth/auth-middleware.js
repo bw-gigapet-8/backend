@@ -8,7 +8,7 @@ module.exports = async (req, res, next) => {
             if(err) {
                 res.status(400).json({ message:'cant pass' })
             } else {
-                req.user = { username:decodeToken.username }
+                req.user = { username: decodeToken.username }
                 next()
             }
         })
