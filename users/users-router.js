@@ -12,7 +12,19 @@ router.get('/:id', async (req, res, next) => {
     const user = await Users.findById(req.params.id)
     const token = req.headers.authorization
     const decoded = jwt_decode(token)
-    console.log(user, token, decoded)
+    if(!user || !token) {
+        res.status(404).json({
+            error: `No user found.`
+        })
+    } else {
+        if(user.password === decoded.password) {
+            res.status(200).json(user)
+        } else {
+            res.status(400).json({
+                error: `Request denied. This is not your profile!`
+            })
+        }
+    }
 })
 
 

@@ -58,7 +58,8 @@ function signToken(user) {
 
     const payload = {
         subject: user.id,
-        username: user.username
+        username: user.username,
+        password: user.password
     }
 
     return jwt.sign(payload, secrets.jwtSecret, options)
