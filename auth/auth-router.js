@@ -38,6 +38,7 @@ router.post('/login', async (req, res, next) => {
         if(user && bcrypt.compareSync(password, user.password)) {
             const token = signToken(user)
             res.json({
+                id: user.id,
                 message: `Hello there, ${username}`,
                 token
             })
