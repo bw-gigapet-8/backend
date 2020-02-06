@@ -15,7 +15,6 @@ router.post('/register', async (req, res, next) => {
             user.password = hash
 
             const added = await Users.addUser(user)
-            console.log(added)
             res.status(201).json(added)
         } else {
             res.status(500).json({
@@ -23,7 +22,6 @@ router.post('/register', async (req, res, next) => {
             })
         }
     }
-    
     catch(err) {
         res.json({
             error: 'This is where things went wrong.'
