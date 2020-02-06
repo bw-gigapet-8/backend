@@ -14,18 +14,22 @@ Returns a welcome message to verify connection to the DB.
 https://gigapetdb.herokuapp.com/users
 Returns a list of all users actively signed up for our application.
 
-Requires a username and password, then returns the newly signed up user.
+
 POST: https://gigapetdb.herokuapp.com/auth/register
+Requires a username and password, then returns the newly signed up user.
 
 
-Requires login credentials (username and password), and returns a welcome message and token for the user.
 POST: https://gigapetdb.herokuapp.com/auth/login
+Requires login credentials (username and password), and returns a welcome message and token for the user.
 
+
+POST: https://gigapetdb.herokuapp.com/auth/:id/pet
 Requires a name ONLY, health is set default to 15.
-Post request adds a pet, more coming soon.
-req.param.id points to the user.id.
-https://gigapetdb.herokuapp.com/auth/:id/pet
-
-
+Post request adds a pet.
+req.params.id points to the user.id.
 
 GET: https://gigapetdb.herokuapp.com/auth/:id/pet
+Returns pet name, pet_id, and health for selected pet.
+
+
+POST: https://gigapetdb.herokuapp.com/auth/:id/pet/:pet_id
