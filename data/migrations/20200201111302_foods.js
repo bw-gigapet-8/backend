@@ -9,6 +9,7 @@ exports.up = function(knex) {
             .notNullable()
             .references('id')
             .inTable('Categories')
+            .onUpdate('CASCADE')
     })
 };
 

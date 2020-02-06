@@ -6,7 +6,7 @@ module.exports = {
     getPetsDiet
 }
 
-async function createPet(req, res, pet_data) {
+async function createPet(req, res, pet_data) { // Requires a pet_name
     try {
         const pet = await db('Pets').insert(pet_data)
         const newPet = await findPet(pet[0])
@@ -23,11 +23,19 @@ async function createPet(req, res, pet_data) {
 }
 
 async function findPet(id) {
-    const pet = await db('Pets').where({ id }).first().select('id', 'name', 'health')
+    const pet = await db('Pets').where({ id }).first().select('id', 'pet_name', 'health')
     return pet
 }
 
 async function getPetsDiet(pet_id) {
-    const diet = await db('Foods_Eaten').where({ pet_id })
-    console.log(diet)
+    try {
+        const diet = await db('Foods_Eaten').where({ pet_id })
+        .join('Pets', { 'Pets.id': pet_id })
+        .join('Foods', {'Foods.id': 'Foods_Eaten.food_id' })
+            .select('Pets.id as pet_id', 'Pets.pet_name', 'Foods.name', 'Foods.category_id', 'Foods_Eaten.id as food_eaten_id')
+        return diet
+    }
+    catch(err) {
+        console.log(err)
+    }
 }

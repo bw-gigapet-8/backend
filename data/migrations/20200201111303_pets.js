@@ -3,7 +3,7 @@ exports.up = function(knex) {
     return knex.schema.createTable('Pets', (table) => {
         table.increments('id')
             .notNullable()
-        table.string('name')
+        table.string('pet_name')
             .notNullable()
         table.integer('health')
             .notNullable()
