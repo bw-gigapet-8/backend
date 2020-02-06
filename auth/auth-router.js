@@ -23,7 +23,7 @@ router.post('/register', async (req, res, next) => {
         }
     }
     catch(err) {
-        res.json({
+        res.status(500).json({
             error: 'This is where things went wrong.',
             more_info: err.stack
         })
