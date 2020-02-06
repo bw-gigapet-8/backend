@@ -17,6 +17,7 @@ module.exports = {
 
 async function checkUser(req, res, next) {
     const user = await Users.findById(req.params.id)
+    console.log(user)
     const token = req.headers.authorization
     const decoded = jwt_decode(token)
     if(!user || !token) {
