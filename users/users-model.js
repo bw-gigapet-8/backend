@@ -26,7 +26,7 @@ async function getAllUsers() {
 }
 
 async function findById(id) {
-    const user = await db('Users').where({ id }).select('id', 'username', 'password', 'pet_id')
+    const user = await db('Users').where({ id }).first().select('id', 'username', 'pet_id')
     return user
 }
 
