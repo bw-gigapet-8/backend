@@ -6,10 +6,11 @@ module.exports = {
     findUserByUsername,
     getAllUsers,
     findById,
+    findUsersPet
 }
 
 async function addUser(user) {
-    const registered = await db('users').insert(user)
+    const registered = await db('Users').insert(user)
     const createdUser = await findById(registered[0])
     return createdUser
 }
@@ -25,6 +26,11 @@ async function getAllUsers() {
 }
 
 async function findById(id) {
-    const user = await db('Users').first().where({ id }).select('id', 'username', 'password')
+    const user = await db('Users').where({ id }).first().select('id', 'username', 'password', 'pet_id')
     return user
+}
+
+async function findUsersPet(user_id) {
+    const user = findById(user_id)
+    
 }

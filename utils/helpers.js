@@ -1,8 +1,12 @@
 const Users = require('../users/users-model')
 const jwt_decode = require('jwt-decode')
+const db = require('../data/db-config')
 
 module.exports = {
-    checkUser
+    checkUser,
+    ateFood,
+    addFood,
+    getCategoryName
 }
 
 async function checkUser(req, res, next) {
@@ -22,4 +26,25 @@ async function checkUser(req, res, next) {
             })
         }
     }
+}
+
+async function ateFood(pet, food_name, category_name, tod) {
+    const time_of_day = tod
+    const category = await db('Categories').where({ name: category_name }).first()
+    const category_id = category.id
+    const pet_id = pet.id
+    const food_id = await addFood(food_name)
+
+    const success = await db('Foods_Eaten').insert({ pet_id, food_id, time_of_day })
+    return success
+}
+
+async function addFood(food) {
+    const id = await db('Foods').insert(food)
+    return id[0]
+}
+
+async function getCategoryName(id) {
+    const name = await db('Categories').where({ id }).first().select('name')
+    return name.name
 }
