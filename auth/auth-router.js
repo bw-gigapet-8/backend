@@ -8,7 +8,6 @@ const usersRouter = require('../users/users-router')
 router.use('/user', usersRouter)
 
 router.post('/register', async (req, res, next) => {
-    try {
         const user = req.body
         if(user.username && user.password) {
             const hash = bcrypt.hashSync(user.password, 13)
@@ -21,13 +20,6 @@ router.post('/register', async (req, res, next) => {
                 error: "Must submit a username and password!"
             })
         }
-    }
-    catch(err) {
-        res.status(500).json({
-            error: 'This is where things went wrong.',
-            more_info: err.stack
-        })
-    }
 })
 
 router.post('/login', async (req, res, next) => {
