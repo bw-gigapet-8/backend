@@ -86,5 +86,4 @@ async function getCategoryName(id) {
 
 async function alterHealth(pet_id, modifier) { // Not in use yet
     const pet = Pets.findPet(pet_id)
-    console.log(pet)
 }
