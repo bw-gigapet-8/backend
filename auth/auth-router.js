@@ -38,15 +38,15 @@ router.post('/register', async (req, res, next) => {
 router.post('/login', async (req, res, next) => {
     try {
         let { username, password } = req.body
-        console.log(username)
         const user = await Users.findUserByUsername(username)
+        console.log(`User`, user)
         if(user && bcrypt.compareSync(password, user.password)) {
             const token = await signToken(username)
             res.json({
                 id: user.id,
                 message: `Hello there, ${username}`,
                 token
-            })
+            }) 
         } else {
             res.status(404).json({
                 error: `Credentials do not match any user in our Hive Mind. Please try again.`

@@ -12,14 +12,12 @@ module.exports = {
 async function addUser(user) {
     const registered = await db('Users').first().insert(user, 'id')
     const createdUser = await findById(registered[0])
-    console.log('Created User', createdUser)
     return createdUser
 }
 
 async function findUserByUsername(username) {
     const user = await db('Users').where({ username }).select('id', 'username', 'password')
-    console.log(user[0])
-    return user
+    return user[0]
 }
 
 async function getAllUsers() {
