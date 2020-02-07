@@ -86,11 +86,12 @@ async function updateFoodEntry(pet_id, food_eaten_id, changes) {
     }
     const newFood = await addFood(food)
     const foodUpdated = await db('Foods_Eaten').where({ id: food_eaten_id }).update({ food_id: newFood, time_of_day })
-    return foodUpdated[0]
+    return foodUpdated
 }
 
 async function addFood(food) {
     const id = await db('Foods').insert(food)
+    console.log(`addFood ID`, id[0])
     return id[0]
 }
 
