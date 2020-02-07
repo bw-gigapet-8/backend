@@ -8,7 +8,7 @@ module.exports = {
 
 async function createPet(req, res, pet_data) { // Requires a pet_name
     try {
-        const pet = await db('Pets').insert(pet_data)
+        const pet = await db('Pets').insert(pet_data, 'id')
         const newPet = await findPet(pet[0])
         console.log(newPet)
         const pet_id = newPet.id
