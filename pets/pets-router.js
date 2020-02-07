@@ -41,7 +41,7 @@ router.post('/:pet_id/foods', async (req, res, next) => {
         res.status(201).json(added)
     }
     catch(err) {
-        res.json(err)
+        res.json(`This is the catch`, err)
     }
 })
 
