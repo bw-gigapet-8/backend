@@ -35,13 +35,9 @@ router.post('/:pet_id/foods', async (req, res, next) => {
         const ToD = req.body.time_of_day
         const categoryId = req.body.category_id // CHECK
         const userFound = await Users.findById(req.params.id) // CHECK
-        alert(userFound)
         const petFound = await Pets.findPet(userFound.pet_id) // CHECK
-        alert(petFound)
         const cat_name = await Helpers.getCategoryName(categoryId) // CHECK
-        alert(cat_name)
         const added = await Helpers.ateFood(petFound, food, cat_name, ToD)
-        alert(added)
         res.status(201).json(added)
     }
     catch(err) {
