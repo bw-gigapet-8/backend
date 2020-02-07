@@ -53,7 +53,7 @@ async function ateFood(pet, food_id, tod) {
         const pet_id = pet.id
         console.log(pet_id, food_id, time_of_day)
         const success = await db('Foods_Eaten').insert({ pet_id, food_id, time_of_day })
-        console.log(`SUCCESSSS`, success[0])
+        console.log(`SUCCESSSS`, success)
         return success[0]
     }
     catch(err) {
@@ -90,9 +90,7 @@ async function updateFoodEntry(pet_id, food_eaten_id, changes) {
 }
 
 async function addFood(food) {
-    console.log(`FOOD`, food)
     const foodAdded = await db('Foods').insert({ name: food.name, category_id: food.category_id }).returning("*")
-    console.log(`addFood ID`, foodAdded[0].id)
     return foodAdded[0].id
 }
 
