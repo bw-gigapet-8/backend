@@ -36,6 +36,7 @@ async function checkUser(req, res, next) {
 }
 
 async function ateFood(pet, food_name, category_name, tod) {
+    console.log(pet)
     const time_of_day = tod
     const category = await db('Categories').where({ name: category_name }).first()
     const category_id = category.id
