@@ -7,6 +7,7 @@ const decodeToken = require('jwt-decode')
 module.exports = {
     decodedToken,
     checkUser,
+    findFood,
     ateFood,
     deleteFoodEntry,
     updateFoodEntry,
@@ -14,6 +15,11 @@ module.exports = {
     getCategoryName,
     alterHealth,
     getFoodEntry
+}
+
+async function findFood(food_id) {
+    const food = await db('Foods').where({ id: food_id }).select('*')
+    return food[0]
 }
 
 async function decodedToken(req) {
@@ -41,16 +47,11 @@ async function checkUser(req, res, next) {
     }
 }
 
-async function ateFood(pet, food_name, category_name, tod) {
+async function ateFood(pet, food_id, tod) {
     try {
         const time_of_day = tod
-        const category = await db('Categories').where({ name: category_name }).first()
-        const category_id = category.id
         const pet_id = pet.id
-        const food_id = await addFood(food_name)
-
         const success = await db('Foods_Eaten').insert({ pet_id, food_id, time_of_day }, 'id').returning('*')
-        console.log(success[0])
         return success[0]
     }
     catch(err) {
@@ -61,7 +62,7 @@ async function ateFood(pet, food_name, category_name, tod) {
 async function getFoodEntry(food_eaten_id) {
     try {
         const entry = await db('Foods_Eaten').where({ 'Foods_Eaten.id': food_eaten_id })
-            .join('Foods', {'Foods.id': 'Foods_Eaten.food_id'})
+            .join('Foods', {'Foods.id': 'Foods_Eaten.food_eaten_id'})
                 .select('Foods.id as food_id', 'Foods.name', 'Foods_Eaten.time_of_day')
         return entry[0]
     }
