@@ -52,7 +52,6 @@ router.post('/login', async (req, res, next) => {
                 error: `Credentials do not match any user in our Hive Mind. Please try again.`
             })
         }
-
     }
     catch(err) {
         next(err)
