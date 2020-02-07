@@ -16,7 +16,7 @@ async function createPet(req, res, pet_data) { // Requires a pet_name
         return newPet
     }
     catch(err) {
-        res.status(500).json(err)
+        res.status(500).json(err.stack)
     }
 }
 
