@@ -32,7 +32,6 @@ router.post('/:pet_id/foods', async (req, res, next) => {
         const token = await Helpers.decodedToken(req)
         const pet = await Users.findUsersPet(token.subject)
         const foodId = await Helpers.addFood(food)
-        const addedFood = await Helpers.findFood(foodId)
         const added = await Helpers.ateFood(pet, foodId, time_of_day)
         res.status(201).json(added)
     }
