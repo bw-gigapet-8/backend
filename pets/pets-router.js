@@ -31,7 +31,8 @@ router.post('/:pet_id/foods', async (req, res, next) => {
         }
         const cat_name = await Helpers.getCategoryName(category_id) // CHECK\
         const token = await Helpers.decodedToken(req)
-        const pet = token.pet
+        const user = await Users.findUsersPet(token.subject)
+        const pet = await Pets.findPet(user.id)
         const added = await Helpers.ateFood(pet, food, cat_name, time_of_day)
         res.status(201).json(added)
     }
