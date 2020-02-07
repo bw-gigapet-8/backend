@@ -13,8 +13,6 @@ exports.up = function(knex) {
             .inTable('Foods')
             .onDelete('CASCADE')
             .onUpdate('CASCADE')
-        table.string('time_of_day')
-            .notNullable()
         table.timestamp('created_at')
             .defaultTo(knex.fn.now());
     })
