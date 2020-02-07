@@ -13,6 +13,10 @@ router.get('/', async (req, res, next) => {
 
 router.get('/:id', async (req, res, next) => {
     Helpers.checkUser(req, res, next)
+    const token = await Helpers.decodedToken(req)
+    const username = token.username
+    console.log(username)
+    const user = Users.findUserByUsername
 })
 
 module.exports = router

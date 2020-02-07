@@ -51,7 +51,7 @@ async function ateFood(pet, food_id, tod) {
     try {
         const time_of_day = tod
         const pet_id = pet.id
-        const success = await db('Foods_Eaten').insert({ pet_id, food_id: 99, time_of_day })
+        const success = await db('Foods_Eaten').insert({ pet_id, food_id, time_of_day })
         return success[0]
     }
     catch(err) {
