@@ -14,7 +14,7 @@ router.post('/register', async (req, res, next) => {
         const user = await Users.findUserByUsername(username)
         if(username && password) {
             const hash = bcrypt.hashSync(password, 13)
-            password = hash
+            user.password = hash
 
             const added = await Users.addUser(user)
             res.status(201).json(added)
