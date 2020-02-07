@@ -19,7 +19,7 @@ async function addUser(user) {
 
 async function findUserByUsername(username) {
     const user = await db('Users').where({ username }).select('id', 'username', 'password')
-    return user[0]
+    return user
 }
 
 async function getAllUsers() {
