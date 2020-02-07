@@ -54,7 +54,7 @@ async function getFoodEntry(food_eaten_id) {
         return entry
     }
     catch(err) {
-        console.log(err)
+        return err
     }
 }
 
