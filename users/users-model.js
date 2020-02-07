@@ -17,7 +17,6 @@ async function addUser(user) {
 
 async function findUserByUsername(username) {
     const user = await db('Users').where({ username }).first().select('id', 'username', 'password')
-    console.log(user)
     return user
 }
 

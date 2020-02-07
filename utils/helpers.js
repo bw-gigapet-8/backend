@@ -41,8 +41,6 @@ async function ateFood(pet, food_name, category_name, tod) {
     const category_id = category.id
     const pet_id = pet.id
     const food_id = await addFood(food_name)
-    const timestamp = timestamp('YYYYMMDDHHmm')
-    console.log(timestamp)
 
     const success = await db('Foods_Eaten').insert({ pet_id, food_id, time_of_day })
     return success

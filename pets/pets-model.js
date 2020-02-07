@@ -11,7 +11,6 @@ async function createPet(req, res, pet_data) { // Requires a pet_name
         const pet = await db('Pets').insert(pet_data)
         const newPet = await findPet(pet[0])
         const pet_id = newPet.id
-        console.log(pet_id)
         await db('Users').where({id: req.params.id}).update({pet_id: pet_id})
         return newPet
     }

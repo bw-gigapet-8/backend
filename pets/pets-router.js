@@ -8,19 +8,20 @@ const Helpers = require('../utils/helpers')
 
 router.post('/', async (req, res, next) => {
     const pet = await Pets.createPet(req, res, req.body)
+    console.log(pet)
     res.json(pet)
 })
 
-router.get('/', async (req, res, next) => {
+router.get('/:pet_id', async (req, res, next) => {
     try {
-        const id = req.params.id
+        const id = req.params.pet_id
         console.log(id)
         const pet = await Pets.findPet(id)
         console.log(pet)
         res.json(pet)
     }
     catch(err) {
-        return err
+        res.status(500).json(err)
     }
 })
 
@@ -64,7 +65,6 @@ router.get('/:pet_id/foods/:food_eaten_id', async (req, res, next) => {
 router.put('/:pet_id/foods/:food_eaten_id', async (req, res, next) => { // Can take a name, and time of day, and category.
     try {
         const foodEatenId = req.params.food_eaten_id
-        console.log(foodEatenId)
         const updated = await Helpers.updateFoodEntry(req.params.pet_id, foodEatenId, req.body)
         res.json(updated)
     }
