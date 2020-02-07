@@ -26,6 +26,7 @@ router.get('/:pet_id', async (req, res, next) => {
 })
 
 router.post('/:pet_id/foods', async (req, res, next) => {
+    try {
         const { name, category_id } = req.body
         const food = {
             name,
@@ -38,6 +39,10 @@ router.post('/:pet_id/foods', async (req, res, next) => {
         const cat_name = await Helpers.getCategoryName(categoryId) // CHECK
         const added = await Helpers.ateFood(petFound, food, cat_name, ToD)
         res.status(201).json(added)
+    }
+    catch(err) {
+        res.json(`This is the catch`, err)
+    }
 })
 
 router.get('/:pet_id/foods', async (req, res, next) => {
