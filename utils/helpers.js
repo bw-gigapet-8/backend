@@ -50,7 +50,8 @@ async function ateFood(pet, food_name, category_name, tod) {
         const food_id = await addFood(food_name)
 
         const success = await db('Foods_Eaten').insert({ pet_id, food_id, time_of_day }, 'id')
-        return success
+        console.log(success[0])
+        return success[0]
     }
     catch(err) {
         return err.stack
