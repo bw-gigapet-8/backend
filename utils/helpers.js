@@ -47,7 +47,7 @@ async function ateFood(pet, food_name, category_name, tod) {
         return success
     }
     catch(err) {
-        return err
+        return err.stack
     }
 }
 
@@ -59,7 +59,7 @@ async function getFoodEntry(food_eaten_id) {
         return entry
     }
     catch(err) {
-        return err
+        return err.stack
     }
 }
 
