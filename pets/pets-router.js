@@ -13,7 +13,8 @@ router.post('/', async (req, res, next) => {
 router.get('/:pet_id', async (req, res, next) => {
     try {
         const token = await Helpers.decodedToken(req)
-        res.json(token.pet)
+        const pet = await Pets.findPet(token.pet.id)
+        res.json(pet)
     }
     catch(err) {
         res.status(500).json(err.stack)
