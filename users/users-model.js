@@ -31,6 +31,7 @@ async function findById(id) {
 }
 
 async function findUsersPet(user_id) {
-    const user = findById(user_id)
-    
+    const pet = await db('Users').where({ id: user_id }).first().select('pet_id')
+    const usersPet = await db('Pets').where({ id: pet.pet_id }).first().select('*')
+    return usersPet
 }

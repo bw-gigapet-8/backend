@@ -2,9 +2,10 @@ const Users = require('../users/users-model')
 const Pets = require('../pets/pets-model')
 const jwt_decode = require('jwt-decode')
 const db = require('../data/db-config')
-const timestamp = require('time-stamp')
+const decodeToken = require('jwt-decode')
 
 module.exports = {
+    decodedToken,
     checkUser,
     ateFood,
     deleteFoodEntry,
@@ -15,9 +16,14 @@ module.exports = {
     getFoodEntry
 }
 
+async function decodedToken(req) {
+        const token = req.headers.authorization
+        const decoded = decodeToken(token)
+        return decoded
+}
+
 async function checkUser(req, res, next) {
     const user = await Users.findById(req.params.id)
-    console.log(user)
     const token = req.headers.authorization
     const decoded = jwt_decode(token)
     if(!user || !token) {
@@ -43,7 +49,7 @@ async function ateFood(pet, food_name, category_name, tod) {
         const pet_id = pet.id
         const food_id = await addFood(food_name)
 
-        const success = await db('Foods_Eaten').insert({ pet_id, food_id, time_of_day }, 'id').returning('*')
+        const success = await db('Foods_Eaten').insert({ pet_id, food_id, time_of_day }, 'id')
         return success
     }
     catch(err) {
@@ -75,7 +81,7 @@ async function updateFoodEntry(pet_id, food_eaten_id, changes) {
         category_id
     }
     const newFood = await addFood(food)
-    const foodUpdated = await db('Foods_Eaten').where({ id: food_eaten_id }).update({ food_id: newFood, time_of_day }).returning('*')
+    const foodUpdated = await db('Foods_Eaten').where({ id: food_eaten_id }).update({ food_id: newFood, time_of_day })
     return foodUpdated[0]
 }
 
