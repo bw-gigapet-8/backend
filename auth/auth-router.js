@@ -10,7 +10,7 @@ router.use('/user', usersRouter)
 
 router.post('/register', async (req, res, next) => {
     try {
-        const { username, password } = req.body
+        let { username, password } = req.body
         const user = await Users.findUserByUsername(username)
         if(username && password) {
             let hash = bcrypt.hashSync(password, 13)
