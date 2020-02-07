@@ -25,11 +25,15 @@ router.get('/:pet_id', async (req, res, next) => {
 router.post('/:pet_id/foods', async (req, res, next) => {
     try {
         const { name, category_id, time_of_day } = req.body
+        const food = {
+            name,
+            category_id
+        }
         const token = await Helpers.decodedToken(req)
         const pet = await Users.findUsersPet(token.subject)
-        const foodId = await Helpers.addFood(req.body)
+        const foodId = await Helpers.addFood(food)
         console.log(`Before the function`, foodId)
-        const added = await Helpers.ateFood(pet, foodId)
+        const added = await Helpers.ateFood(pet, foodId, time_of_day)
         console.log('ADDED!!!!!!!', added)
         res.status(201).json(added)
     }
