@@ -52,6 +52,7 @@ async function ateFood(pet, food_id, tod) {
         const time_of_day = tod
         const pet_id = pet.id
         const success = await db('Foods_Eaten').insert({ pet_id, food_id, time_of_day })
+        console.log(`SUCCESSSS`, success)
         return success[0]
     }
     catch(err) {
