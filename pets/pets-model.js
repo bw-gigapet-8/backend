@@ -9,7 +9,7 @@ module.exports = {
 async function createPet(req, res, pet_data) { // Requires a pet_name
     try {
         const pet = await db('Pets').insert(pet_data)
-        const newPet = await findPet(pet[0])
+        const newPet = await findPet(pet)
         console.log(newPet)
         const pet_id = newPet.id
         await db('Users').where({id: req.params.id}).update({pet_id: pet_id})
@@ -21,8 +21,8 @@ async function createPet(req, res, pet_data) { // Requires a pet_name
 }
 
 async function findPet(id) {
-    const pet = await db('Pets').where({ id }).select('id', 'pet_name', 'health')
-    return pet[0]
+    const pet = await db('Pets').where({ id }).first().select('id', 'pet_name', 'health')
+    return pet
 }
 
 async function getPetsDiet(pet_id) {
