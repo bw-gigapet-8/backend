@@ -92,8 +92,8 @@ async function updateFoodEntry(pet_id, food_eaten_id, changes) {
 async function addFood(food) {
     console.log(`FOOD`, food)
     const foodAdded = await db('Foods').insert({ name: food.name, category_id: food.category_id }).returning("*")
-    console.log(`addFood ID`, foodAdded[0])
-    return foodAdded[0]
+    console.log(`addFood ID`, foodAdded[0].id)
+    return foodAdded[0].id
 }
 
 async function getCategoryName(id) {
