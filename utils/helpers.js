@@ -51,8 +51,8 @@ async function ateFood(pet, food_id, tod) {
     try {
         const time_of_day = tod
         const pet_id = pet.id
-        const success = await db('Foods_Eaten').insert({ food_id: food_id, time_of_day: time_of_day, pet_id: pet_id }).returning('*')
-        return success[0]
+        const success = await db('Foods_Eaten').insert({ pet_id, food_id, time_of_day })
+        return success
     }
     catch(err) {
         return err.stack
