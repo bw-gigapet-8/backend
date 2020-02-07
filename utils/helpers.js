@@ -62,7 +62,7 @@ async function ateFood(pet, food_id, tod) {
 async function getFoodEntry(food_eaten_id) {
     try {
         const entry = await db('Foods_Eaten').where({ 'Foods_Eaten.id': food_eaten_id })
-            .join('Foods', {'Foods.id': 'Foods_Eaten.food__id'})
+            .join('Foods', {'Foods.id': 'Foods_Eaten.food_id'})
                 .select('Foods.id as food_id', 'Foods.name', 'Foods_Eaten.time_of_day')
         return entry[0]
     }
