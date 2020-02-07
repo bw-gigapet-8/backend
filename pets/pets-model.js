@@ -9,10 +9,10 @@ module.exports = {
 
 async function createPet(req, res, pet_data) { // Requires a pet_name
     try {
-        const pet = await db('Pets').insert(pet_data, 'id')
+        const pet = await db('Pets').insert(pet_data, 'id').returning('*')
         const newPet = await findPet(pet[0])
         const pet_id = newPet.id
-        await db('Users').where({id: req.params.id}).update({pet_id: pet_id})
+        await db('Users').where({id: req.params.id}).update({pet_id: pet_id}).returning('*')
         return newPet
     }
     catch(err) {
@@ -30,7 +30,7 @@ async function getPetsDiet(pet_id) {
         const diet = await db('Foods_Eaten').where({ pet_id })
         .join('Pets', { 'Pets.id': pet_id })
         .join('Foods', {'Foods.id': 'Foods_Eaten.food_id' })
-            .select('Pets.id as pet_id', 'Pets.pet_name', 'Foods.name', 'Foods.category_id', 'Foods_Eaten.id as food_eaten_id')
+            .select('Pets.id as pet_id', 'Pets.pet_name', 'Foods.name', 'Foods.category_id', 'Foods_Eaten.id as food_eaten_id').returning('*')
         return diet
     }
     catch(err) {
