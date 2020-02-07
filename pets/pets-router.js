@@ -24,7 +24,7 @@ router.get('/:pet_id', async (req, res, next) => {
 
 router.post('/:pet_id/foods', async (req, res, next) => {
     try {
-        const { name, category_id, time_of_day } = req.body
+        const { name, category_id } = req.body
         const food = {
             name,
             category_id
@@ -33,7 +33,7 @@ router.post('/:pet_id/foods', async (req, res, next) => {
         const pet = await Users.findUsersPet(token.subject)
         const foodId = await Helpers.addFood(food)
         console.log(`Before the function`, foodId)
-        const added = await Helpers.ateFood(pet, foodId, time_of_day)
+        const added = await Helpers.ateFood(pet, foodId)
         console.log('ADDED!!!!!!!', added)
         res.status(201).json(added)
     }
