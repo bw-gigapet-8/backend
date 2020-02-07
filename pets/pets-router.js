@@ -21,7 +21,7 @@ router.get('/:pet_id', async (req, res, next) => {
         res.json(pet)
     }
     catch(err) {
-        res.status(500).json(err)
+        res.status(500).json(err.stack)
     }
 })
 
@@ -53,7 +53,7 @@ router.get('/:pet_id/foods', async (req, res, next) => {
         res.json(diet)
     }
     catch(err) {
-        res.status(400).json(err)
+        res.status(400).json(err.stack)
     }
 })
 
