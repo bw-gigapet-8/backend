@@ -22,6 +22,7 @@ async function createPet(req, res, pet_data) { // Requires a pet_name
 
 async function findPet(id) {
     const pet = await db('Pets').where({ id }).first().select('id', 'pet_name', 'health')
+    console.log(pet)
     return pet
 }
 
