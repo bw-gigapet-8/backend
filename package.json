@@ -19,12 +19,18 @@
     "sqlite3": "^4.1.1",
     "time-stamp": "^2.2.0"
   },
+  "jest": {
+    "testEnvironment": "node"
+  },
   "devDependencies": {
-    "dotenv": "^8.2.0"
+    "cross-env": "^7.0.0",
+    "dotenv": "^8.2.0",
+    "jest": "^25.1.0",
+    "supertest": "^4.0.2"
   },
   "scripts": {
     "start": "node index.js",
-    "test": "echo \"Error: no test specified\" && exit 1",
+    "test": "cross-env DB_ENV=testing jest --watch --verbose",
     "server": "nodemon index.js"
   },
   "repository": {
